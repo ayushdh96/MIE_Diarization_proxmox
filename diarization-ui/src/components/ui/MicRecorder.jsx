@@ -234,7 +234,7 @@ const MicRecorderComponent = () => {
               console.log("Interaction type being sent:", interactionType);
               formData.append("interaction_type", interactionType);
 
-              const res = await fetch("http://127.0.0.1:5001/api/diarize", {
+              const res = await fetch("https://ayushdh96-mie-diarization-proxmox-main.opensource.mieweb.org/api/diarize", {
                 method: "POST",
                 body: formData,
               });
