@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  backend:
+    image: ayushdh96/mie_diarization-backend:latest
+    platform: linux/amd64
+    ports:
+      - "5001:5001"
+    working_dir: /app/whisper-diarization
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5001/api/test"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    pull_policy: always
+
+  frontend:
+    image: ayushdh96/mie_diarization-frontend:latest
+    platform: linux/amd64
+    ports:
+      - "5173:5173"
+    working_dir: /app/diarization-ui
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    pull_policy: always
