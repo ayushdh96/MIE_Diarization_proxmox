@@ -10,7 +10,7 @@ export default defineConfig({
       "/api": "http://localhost:5001",
     },
     host: "0.0.0.0",
-    allowedHosts: ["maxklema-mie-diarization-main.opensource.mieweb.org"],
+    allowedHosts: ["ayushdh96-mie-diarization-proxmox-main.opensource.mieweb.org"],
   },
   plugins: [react(), tailwindcss()],
   resolve: {
