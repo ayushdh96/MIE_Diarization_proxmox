@@ -30,7 +30,7 @@ jobs:
           container_env_vars: '{"whisper-diarization": { "OZWELL_API_KEY":"${{ secrets.OZWELL_API_KEY }}", "HF_TOKEN":"${{ secrets.HF_TOKEN }}", "PORT":"5001", "FLASK_DEBUG":"true" }}'
           runtime_language: '{"whisper-diarization": "python@3.10"}'
           multi_component: 'n'
-          http_port : "5173"
+          http_port: "5001"
           root_start_command: apt-get update && apt-get install -y ffmpeg build-essential cmake libsndfile1 curl && rm -rf /var/lib/apt/lists/*
           install_command: '{"whisper-diarization": "pip install --upgrade pip && pip install -c constraints.txt -r requirements.txt"}'
           start_command: '{"whisper-diarization": "python app.py"}'
