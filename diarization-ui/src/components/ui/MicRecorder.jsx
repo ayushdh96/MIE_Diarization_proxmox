@@ -107,7 +107,9 @@ const MicRecorderComponent = () => {
     };
 
     mediaRecorderRef.current.onstop = () => {
-      const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+      const audioBlob = new Blob(audioChunksRef.current, {
+        type: "audio/webm",
+      });
       const url = URL.createObjectURL(audioBlob);
       setAudioURL(url);
 
@@ -124,7 +126,10 @@ const MicRecorderComponent = () => {
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state !== "inactive"
+    ) {
       mediaRecorderRef.current.stop();
       setIsLoading(false);
       setIsComplete(false);
@@ -151,18 +156,32 @@ const MicRecorderComponent = () => {
 
   return (
     <div className="flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl w-full max-w-md mx-auto">
-      <h2 className="text-xl font-bold">Mic Recorder for Conversation Summarization</h2>
+      <h2 className="text-xl font-bold">
+        Mic Recorder for Conversation Summarization!! Update?
+      </h2>
       <StatusBanner isLoading={isLoading} isComplete={isComplete} />
       <div className="rounded border w-full max-w-full">
         {!showWaveformPlayer ? (
-          <canvas ref={canvasRef} width={400} height={100} className="w-full h-24" />
+          <canvas
+            ref={canvasRef}
+            width={400}
+            height={100}
+            className="w-full h-24"
+          />
         ) : (
-          <Waveform ref={waveformRef} audioUrl={audioURL} onFinish={handleAudioFinish} />
+          <Waveform
+            ref={waveformRef}
+            audioUrl={audioURL}
+            onFinish={handleAudioFinish}
+          />
         )}
       </div>
       {showWaveformPlayer && !isRecording && (
         <div className="flex justify-center mt-2">
-          <button onClick={togglePlay} className="bg-blue-500 text-white px-4 py-2 rounded">
+          <button
+            onClick={togglePlay}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
             {isPlaying ? "Pause" : "Play"}
           </button>
         </div>
@@ -171,27 +190,41 @@ const MicRecorderComponent = () => {
         <Button
           onClick={startRecording}
           disabled={isRecording}
-          className={`${isRecording ? "bg-green-300" : "bg-green-500"
-            } text-white px-4 py-2 rounded disabled:opacity-50`}
+          className={`${
+            isRecording ? "bg-green-300" : "bg-green-500"
+          } text-white px-4 py-2 rounded disabled:opacity-50`}
         >
           Start Recording
         </Button>
         <Button
           onClick={stopRecording}
           disabled={!isRecording}
-          className={`${isRecording ? "bg-red-500" : "bg-red-300"
-            } text-white px-4 py-2 rounded disabled:opacity-50`}
+          className={`${
+            isRecording ? "bg-red-500" : "bg-red-300"
+          } text-white px-4 py-2 rounded disabled:opacity-50`}
         >
           Stop Recording
         </Button>
-        <label htmlFor="file-upload" title="Upload Audio" className="flex flex-col items-center gap-2 cursor-pointer">
+        <label
+          htmlFor="file-upload"
+          title="Upload Audio"
+          className="flex flex-col items-center gap-2 cursor-pointer"
+        >
           <img src="/upload-icon.png" alt="Upload" className="w-6 h-6" />
           <span className="text-xs text-gray-700">Upload Audio</span>
-          <input id="file-upload" type="file" accept="audio/*" onChange={handleFileUpload} className="hidden" />
+          <input
+            id="file-upload"
+            type="file"
+            accept="audio/*"
+            onChange={handleFileUpload}
+            className="hidden"
+          />
         </label>
       </div>
       <div className="w-full mt-2 mb-2">
-        <h3 className="text-sm font-medium mb-1 text-gray-700 text-center">Select Interaction Type</h3>
+        <h3 className="text-sm font-medium mb-1 text-gray-700 text-center">
+          Select Interaction Type
+        </h3>
         <DropdownMenu>
           <DropdownMenuTrigger className="flex justify-center items-center bg-gray-200 text-gray-800 px-2 py-0.5 rounded w-full text-center">
             {interactionType} <ChevronDown className="w-4 h-4 ml-1" />
@@ -221,7 +254,8 @@ const MicRecorderComponent = () => {
       <div>
         <Button
           onClick={async () => {
-            if (!audioURL) return alert("Please record or upload an audio file first.");
+            if (!audioURL)
+              return alert("Please record or upload an audio file first.");
 
             setIsLoading(true);
             setIsComplete(false);
@@ -266,7 +300,9 @@ const MicRecorderComponent = () => {
         </Button>
       </div>
       <div className="w-full mt-2 mb-2">
-        <h3 className="text-sm font-medium mb-1 text-gray-700 text-center">Select View</h3>
+        <h3 className="text-sm font-medium mb-1 text-gray-700 text-center">
+          Select View
+        </h3>
         <DropdownMenu>
           <DropdownMenuTrigger className="flex justify-center items-center bg-gray-200 text-gray-800 px-2 py-0.5 rounded w-full text-center">
             {selectedOption}
@@ -274,8 +310,18 @@ const MicRecorderComponent = () => {
           <DropdownMenuContent className="w-full">
             <DropdownMenuLabel>Select View</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => setSelectedOption("Summary")} className="hover:bg-gray-100">Summary</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setSelectedOption("Diarization")} className="hover:bg-gray-100">Diarization</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setSelectedOption("Summary")}
+              className="hover:bg-gray-100"
+            >
+              Summary
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setSelectedOption("Diarization")}
+              className="hover:bg-gray-100"
+            >
+              Diarization
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -287,13 +333,13 @@ const MicRecorderComponent = () => {
           selectedOption === "Summary"
             ? summary
             : (() => {
-              try {
-                const parsed = JSON.parse(transcript);
-                return parsed.transcript || transcript;
-              } catch {
-                return transcript;
-              }
-            })()
+                try {
+                  const parsed = JSON.parse(transcript);
+                  return parsed.transcript || transcript;
+                } catch {
+                  return transcript;
+                }
+              })()
         }
       />
     </div>
