@@ -157,7 +157,7 @@ const MicRecorderComponent = () => {
   return (
     <div className="flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl w-full max-w-md mx-auto">
       <h2 className="text-xl font-bold">
-        Mic Recorder for Conversation Summarization!! Update?
+        App for Diarizing and Summarizing the Audio
       </h2>
       <StatusBanner isLoading={isLoading} isComplete={isComplete} />
       <div className="rounded border w-full max-w-full">
