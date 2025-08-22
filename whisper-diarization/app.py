@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 OZWELL_API_KEY = os.getenv("OZWELL_API_KEY")
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "https://ayushdh96-mie-diarization-proxmox-main.opensource.mieweb.org"]}})
 
 @app.route('/api/test', methods=['GET'])
 def test():
