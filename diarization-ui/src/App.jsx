@@ -10,7 +10,7 @@ function App() {
   const [backendMessage, setBackendMessage] = useState('');
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5001/api/test')
+    fetch('/api/test')
       .then((res) => res.json())
       .then((data) => {setBackendMessage(data.message)
         console.log('Backend message:', data.message);
